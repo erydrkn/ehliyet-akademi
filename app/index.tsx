@@ -1,14 +1,16 @@
-import { Mail, Plus, Search, Trash2 } from 'lucide-react-native';
-import { useState } from 'react';
-import { ScrollView, View } from 'react-native';
+import { Bookmark, Globe, Mail, Plus, Search, Settings, Trash2 } from 'lucide-react-native';
+import { useRef, useState } from 'react';
+import { Pressable, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Avatar } from '@/components/ui/Avatar';
 import { Badge } from '@/components/ui/Badge';
+import { BottomSheet, type BottomSheetRef } from '@/components/ui/BottomSheet';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { IconButton } from '@/components/ui/IconButton';
 import { Input } from '@/components/ui/Input';
+import { Modal } from '@/components/ui/Modal';
 import { ProgressBar } from '@/components/ui/ProgressBar';
 import { Spinner } from '@/components/ui/Spinner';
 import { Typography } from '@/components/ui/Typography';
@@ -17,6 +19,9 @@ export default function Home() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [withError, setWithError] = useState('hatalı değer');
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalNote, setModalNote] = useState('');
+  const sheetRef = useRef<BottomSheetRef>(null);
 
   return (
     <SafeAreaView className="flex-1 bg-white dark:bg-gray-900">
@@ -146,10 +151,63 @@ export default function Home() {
           </View>
         </View>
 
+        <View className="gap-3">
+          <Typography variant="h3">Overlays</Typography>
+          <Button onPress={() => setModalVisible(true)}>Modal Aç</Button>
+          <Button variant="secondary" onPress={() => sheetRef.current?.present()}>
+            BottomSheet Aç
+          </Button>
+        </View>
+
         <View className="items-center">
           <Spinner size="lg" />
         </View>
       </ScrollView>
+
+      <Modal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        title="Örnek Modal"
+      >
+        <View className="gap-3">
+          <Typography color="secondary">
+            Klavye açıldığında modal kaymamalı. Backdrop'a dokun veya X'e bas.
+          </Typography>
+          <Input
+            label="Not"
+            placeholder="Bir şeyler yaz..."
+            value={modalNote}
+            onChangeText={setModalNote}
+          />
+          <View className="flex-row gap-2">
+            <View className="flex-1">
+              <Button variant="secondary" onPress={() => setModalVisible(false)}>
+                İptal
+              </Button>
+            </View>
+            <View className="flex-1">
+              <Button onPress={() => setModalVisible(false)}>Kaydet</Button>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
+      <BottomSheet ref={sheetRef} title="Kategori Seçin">
+        {[
+          { icon: Bookmark, label: 'Kayıtlılar' },
+          { icon: Globe, label: 'Tüm Kategoriler' },
+          { icon: Settings, label: 'Ayarlar' },
+        ].map(({ icon: Icon, label }) => (
+          <Pressable
+            key={label}
+            onPress={() => sheetRef.current?.dismiss()}
+            className="flex-row items-center gap-3 rounded-xl px-3 py-4 active:bg-gray-100 dark:active:bg-gray-700"
+          >
+            <Icon size={22} color="#6B7280" />
+            <Typography weight="medium">{label}</Typography>
+          </Pressable>
+        ))}
+      </BottomSheet>
     </SafeAreaView>
   );
 }
