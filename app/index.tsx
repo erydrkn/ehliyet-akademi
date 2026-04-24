@@ -1,4 +1,4 @@
-import { useRouter } from 'expo-router';
+import { type Href, useRouter } from 'expo-router';
 import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -18,6 +18,12 @@ export default function Home() {
           Katman 2 tamam — UI kütüphanesi hazır.
         </Typography>
         <Button onPress={() => router.push('/showcase')}>Component Showcase</Button>
+        <Button
+          onPress={() => router.push('/test-data' as Href)}
+          variant="secondary"
+        >
+          Test Data (Sorular)
+        </Button>
       </View>
     </SafeAreaView>
   );

@@ -48,3 +48,6 @@ app-example
 # generated native folders
 /ios
 /android
+
+# Birleştirilmiş soru havuzu (lisans + içerik koruması)
+assets/data/questions.json
