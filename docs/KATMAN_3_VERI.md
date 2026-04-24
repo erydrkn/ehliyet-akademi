@@ -150,6 +150,7 @@ Başla.
 -- Kullanıcı profilleri (auth.users'ı extend ediyoruz)
 CREATE TABLE public.user_profiles (
   id UUID REFERENCES auth.users(id) ON DELETE CASCADE PRIMARY KEY,
+  
   email TEXT UNIQUE NOT NULL,
   full_name TEXT,
   avatar_url TEXT,
