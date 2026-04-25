@@ -147,7 +147,9 @@ function QuizContent({ category, sheetRef, router }: ContentProps) {
     );
   }
 
-  const progressPct = (quiz.currentIndex / quiz.totalQuestions) * 100;
+  const progressPct = Math.round(
+    (quiz.currentIndex / quiz.totalQuestions) * 100,
+  );
 
   return (
     <SafeAreaView

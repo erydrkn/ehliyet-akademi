@@ -1,5 +1,6 @@
 import { type Href, useRouter } from 'expo-router';
-import { ScrollView, View } from 'react-native';
+import { ChevronRight, Pencil, Settings } from 'lucide-react-native';
+import { Pressable, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Badge } from '@/components/ui/Badge';
@@ -9,9 +10,11 @@ import { Spinner } from '@/components/ui/Spinner';
 import { Typography } from '@/components/ui/Typography';
 import { useAuth } from '@/hooks/useAuth';
 import { useProfile } from '@/hooks/useProfile';
+import { useTheme } from '@/hooks/useTheme';
 
 export default function ProfileScreen() {
   const router = useRouter();
+  const { colors } = useTheme();
   const { user, isGuest, signOut, exitGuest } = useAuth();
   const profileQuery = useProfile(user?.id, { enabled: !isGuest });
 
@@ -116,6 +119,32 @@ export default function ProfileScreen() {
             <Typography color="secondary">Kayıt Tarihi</Typography>
             <Typography weight="medium">{createdDate}</Typography>
           </View>
+        </Card>
+
+        <Card padding="none">
+          <Pressable
+            onPress={() => router.push('/profile/edit' as Href)}
+            accessibilityRole="button"
+            className="flex-row items-center justify-between p-4 active:opacity-80"
+          >
+            <View className="flex-row items-center gap-3">
+              <Pencil size={20} color={colors.text} />
+              <Typography variant="body">Profili Düzenle</Typography>
+            </View>
+            <ChevronRight size={20} color={colors.textMuted} />
+          </Pressable>
+          <View className="h-px bg-gray-200 dark:bg-gray-800" />
+          <Pressable
+            onPress={() => router.push('/settings' as Href)}
+            accessibilityRole="button"
+            className="flex-row items-center justify-between p-4 active:opacity-80"
+          >
+            <View className="flex-row items-center gap-3">
+              <Settings size={20} color={colors.text} />
+              <Typography variant="body">Ayarlar</Typography>
+            </View>
+            <ChevronRight size={20} color={colors.textMuted} />
+          </Pressable>
         </Card>
 
         <View className="flex-1" />

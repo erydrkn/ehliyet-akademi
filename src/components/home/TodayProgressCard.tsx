@@ -29,7 +29,9 @@ export function TodayProgressCard({
   }
 
   const isEmpty = questionsToday === 0;
-  const progressValue = Math.min(100, (questionsToday / DAILY_GOAL) * 100);
+  const progressValue = Math.round(
+    Math.min(100, (questionsToday / DAILY_GOAL) * 100),
+  );
 
   return (
     <Card padding="md">

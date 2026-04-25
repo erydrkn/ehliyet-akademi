@@ -161,3 +161,21 @@ export async function fetchExamReview(
 
   return { session, items };
 }
+
+export async function fetchUserExamSessions(
+  userId: string,
+  limit: number = 10,
+): Promise<ExamSession[]> {
+  const { data, error } = await supabase
+    .from('exam_sessions')
+    .select('*')
+    .eq('user_id', userId)
+    .not('completed_at', 'is', null)
+    .order('completed_at', { ascending: false })
+    .limit(limit);
+
+  if (error) {
+    throw new Error(`Geçmiş sınavlar yüklenemedi: ${error.message}`);
+  }
+  return data ?? [];
+}

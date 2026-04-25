@@ -146,7 +146,7 @@ export default function ExamScreen() {
   const selectedForCurrent = exam.answers.get(q.id) ?? null;
   const progressPct =
     exam.totalQuestions > 0
-      ? (exam.currentIndex / exam.totalQuestions) * 100
+      ? Math.round((exam.currentIndex / exam.totalQuestions) * 100)
       : 0;
 
   return (

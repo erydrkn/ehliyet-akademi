@@ -47,7 +47,8 @@ export function QuestionGridSheet({
   const total = questions.length;
   const answeredCount = answers.size;
   const blankCount = total - answeredCount;
-  const progressPct = total > 0 ? (answeredCount / total) * 100 : 0;
+  const progressPct =
+    total > 0 ? Math.round((answeredCount / total) * 100) : 0;
 
   return (
     <BottomSheetModal

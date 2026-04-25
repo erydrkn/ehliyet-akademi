@@ -41,5 +41,7 @@ export const queryKeys = {
     questions: () => [...root, 'exam', 'questions'] as const,
     session: (id: number) => [...root, 'exam', 'session', id] as const,
     review: (id: number) => [...root, 'exam', 'review', id] as const,
+    userSessions: (userId: string) =>
+      [...root, 'exam', 'userSessions', userId] as const,
   },
 } as const;

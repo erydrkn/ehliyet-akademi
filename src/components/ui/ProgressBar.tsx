@@ -17,7 +17,9 @@ const fillClass: Record<Variant, string> = {
 };
 
 export function ProgressBar({ value, variant = 'primary' }: Props) {
-  const clamped = Math.max(0, Math.min(100, value));
+  // Math.round savunması: floating point hesaplar (örn. 7/50*100 = 14.0000000002)
+  // RN style.width yüzdesi long long cast ediliyor → precision hatası fırlatır.
+  const clamped = Math.max(0, Math.min(100, Math.round(value)));
 
   return (
     <View
