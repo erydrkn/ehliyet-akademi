@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { Home, User } from 'lucide-react-native';
+import { BarChart3, BookOpen, Home, User } from 'lucide-react-native';
 
 import { fontFamily } from '@/constants/fonts';
 import { useTheme } from '@/hooks/useTheme';
@@ -28,6 +28,24 @@ export default function TabsLayout() {
         options={{
           title: 'Ana Sayfa',
           tabBarIcon: ({ color, size }) => <Home size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="study"
+        options={{
+          title: 'Çalış',
+          tabBarIcon: ({ color, size }) => (
+            <BookOpen size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="stats"
+        options={{
+          title: 'İstatistik',
+          tabBarIcon: ({ color, size }) => (
+            <BarChart3 size={size} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
