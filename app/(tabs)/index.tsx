@@ -15,6 +15,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useProfile } from '@/hooks/useProfile';
 import { useTheme } from '@/hooks/useTheme';
 import { useUserStats } from '@/hooks/useUserStats';
+import type { QuestionCategory } from '@/types/database';
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -56,8 +57,8 @@ export default function HomeScreen() {
     router.replace('/register' as Href);
   };
 
-  const handleCategoryPress = () => {
-    showToast('Quiz ekranı yakında!', 'info');
+  const handleCategoryPress = (category: QuestionCategory) => {
+    router.push(`/quiz/${category}` as Href);
   };
 
   const handleExamPress = () => {
