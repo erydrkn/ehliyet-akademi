@@ -17,11 +17,15 @@ export const queryKeys = {
     list: (filters: QuestionFilters) => [...root, 'questions', 'list', filters] as const,
     details: () => [...root, 'questions', 'detail'] as const,
     detail: (id: number) => [...root, 'questions', 'detail', id] as const,
+    topic: (topicId: string) => [...root, 'questions', 'topic', topicId] as const,
+    topicCounts: () => [...root, 'questions', 'topic-counts'] as const,
   },
 
   userAnswers: {
     all: [...root, 'userAnswers'] as const,
     byUser: (userId: string) => [...root, 'userAnswers', userId] as const,
+    byUserTopicStats: (userId: string) =>
+      [...root, 'userAnswers', userId, 'topic-stats'] as const,
   },
 
   profile: {

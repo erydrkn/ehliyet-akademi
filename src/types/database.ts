@@ -84,6 +84,7 @@ export type Question = {
   option_d: string;
   correct_answer: AnswerLetter;
   explanation: string | null;
+  topic: string | null;
   source: string | null;
   year: number | null;
   tags: string[] | null;

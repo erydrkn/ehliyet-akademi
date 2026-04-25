@@ -1,5 +1,6 @@
 import { supabase } from '@/lib/supabase';
 import type { QuestionFilters } from '@/constants/query-keys';
+import type { TopicId } from '@/constants/topics';
 import type { Question } from '@/types/database';
 
 export async function fetchQuestions(filters: QuestionFilters = {}): Promise<Question[]> {
@@ -67,5 +68,30 @@ export async function fetchRandomQuestions(
   }
 
   const shuffled = [...data].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, count);
+}
+
+export async function fetchTopicQuestions(
+  topicId: TopicId,
+  count: number = 10,
+): Promise<Question[]> {
+  const { data, error } = await supabase
+    .from('questions')
+    .select('*')
+    .eq('topic', topicId)
+    .eq('is_active', true)
+    .limit(count * 3);
+
+  if (error) {
+    throw new Error(`${topicId} soruları yüklenemedi: ${error.message}`);
+  }
+  if (!data) return [];
+
+  // Fisher-Yates shuffle
+  const shuffled = [...data];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
   return shuffled.slice(0, count);
 }

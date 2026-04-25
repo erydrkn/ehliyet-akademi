@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Typography } from '@/components/ui/Typography';
 import { CATEGORIES } from '@/constants/categories';
+import { TOPICS, type TopicId } from '@/constants/topics';
 import { useAuth } from '@/hooks/useAuth';
 import type { QuestionCategory } from '@/types/database';
 
@@ -32,6 +33,7 @@ export default function QuizResultScreen() {
     correct?: string;
     total?: string;
     category?: string;
+    topicId?: string;
   }>();
 
   const correct = Math.max(0, Number(params.correct ?? 0));
@@ -39,8 +41,16 @@ export default function QuizResultScreen() {
   const pct = Math.round((correct / total) * 100);
   const feedback = getFeedback(pct);
   const validCategory = isValidCategory(params.category) ? params.category : null;
+  const validTopicId =
+    params.topicId && TOPICS.some((t) => t.id === params.topicId)
+      ? (params.topicId as TopicId)
+      : null;
 
   const handleRetry = () => {
+    if (validTopicId) {
+      router.replace(`/quiz/topic/${validTopicId}` as Href);
+      return;
+    }
     if (validCategory) {
       router.replace(`/quiz/${validCategory}` as Href);
     } else {
