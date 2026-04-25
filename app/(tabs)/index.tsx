@@ -9,7 +9,6 @@ import { StreakCard } from '@/components/home/StreakCard';
 import { TodayProgressCard } from '@/components/home/TodayProgressCard';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
-import { useToast } from '@/components/ui/ToastProvider';
 import { Typography } from '@/components/ui/Typography';
 import { useAuth } from '@/hooks/useAuth';
 import { useProfile } from '@/hooks/useProfile';
@@ -20,7 +19,6 @@ import type { QuestionCategory } from '@/types/database';
 export default function HomeScreen() {
   const router = useRouter();
   const { colors } = useTheme();
-  const { showToast } = useToast();
   const { user, isGuest, exitGuest } = useAuth();
 
   const userId = isGuest ? undefined : user?.id;
@@ -62,7 +60,7 @@ export default function HomeScreen() {
   };
 
   const handleExamPress = () => {
-    showToast('Sınav yakında!', 'info');
+    router.push('/exam' as Href);
   };
 
   const stats = statsQuery.data;

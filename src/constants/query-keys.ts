@@ -35,4 +35,11 @@ export const queryKeys = {
     weakCategories: (userId: string) =>
       [...root, 'stats', userId, 'weakCategories'] as const,
   },
+
+  exam: {
+    all: [...root, 'exam'] as const,
+    questions: () => [...root, 'exam', 'questions'] as const,
+    session: (id: number) => [...root, 'exam', 'session', id] as const,
+    review: (id: number) => [...root, 'exam', 'review', id] as const,
+  },
 } as const;
