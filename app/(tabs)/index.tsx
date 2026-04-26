@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { RefreshControl, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { AdBanner } from '@/components/ads/AdBanner';
 import { CategoryGrid } from '@/components/home/CategoryGrid';
 import { ExamCTACard } from '@/components/home/ExamCTACard';
 import { StreakCard } from '@/components/home/StreakCard';
@@ -120,6 +121,8 @@ export default function HomeScreen() {
         </View>
 
         <ExamCTACard onPress={handleExamPress} />
+
+        <AdBanner />
       </ScrollView>
     </SafeAreaView>
   );

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Pressable, RefreshControl, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { AdBanner } from '@/components/ads/AdBanner';
 import { CategoryStatsCard } from '@/components/stats/CategoryStatsCard';
 import { ExamHistoryCard } from '@/components/stats/ExamHistoryCard';
 import { OverallStatsCard } from '@/components/stats/OverallStatsCard';
@@ -257,6 +258,8 @@ export default function StatsScreen() {
             </View>
           </Card>
         )}
+
+        <AdBanner />
       </ScrollView>
     </SafeAreaView>
   );

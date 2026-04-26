@@ -1,4 +1,5 @@
 import { type Href, useLocalSearchParams, useRouter } from 'expo-router';
+import { useEffect } from 'react';
 import { ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -6,8 +7,10 @@ import { CategoryBreakdownCard } from '@/components/exam/CategoryBreakdownCard';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Typography } from '@/components/ui/Typography';
+import { INTERSTITIAL_RULES } from '@/constants/ads';
 import { CATEGORIES } from '@/constants/categories';
 import { useAuth } from '@/hooks/useAuth';
+import { preloadInterstitial, showInterstitial } from '@/lib/ads';
 import type { QuestionCategory } from '@/types/database';
 
 type CategoryStat = { correct: number; total: number };
@@ -87,6 +90,16 @@ export default function ExamResultScreen() {
     await exitGuest();
     router.replace('/register' as Href);
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      void showInterstitial(INTERSTITIAL_RULES.EXAM_END_PROBABILITY);
+    }, 1500);
+
+    preloadInterstitial();
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const scoreCardClass = passed
     ? 'bg-green-50 dark:bg-green-950'

@@ -225,6 +225,7 @@ const KEYWORD_MAP: Record<QuestionCategory, Array<{ keywords: string[]; topic: T
   ],
 };
 
+
 const UPDATE_BATCH_SIZE = 100;
 
 function tagQuestion(q: QuestionRow): TopicId {

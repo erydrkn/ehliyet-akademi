@@ -3,6 +3,7 @@ import { ChevronRight, Pencil, Settings } from 'lucide-react-native';
 import { Pressable, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { AdBanner } from '@/components/ads/AdBanner';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
@@ -148,6 +149,8 @@ export default function ProfileScreen() {
         </Card>
 
         <View className="flex-1" />
+
+        <AdBanner />
 
         <Button
           onPress={handleSignOut}

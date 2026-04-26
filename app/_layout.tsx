@@ -19,6 +19,7 @@ import { useShallow } from 'zustand/react/shallow';
 import { getSession, onAuthStateChange } from '@/api/auth';
 import { Spinner } from '@/components/ui/Spinner';
 import { ToastProvider } from '@/components/ui/ToastProvider';
+import { initializeAds, preloadInterstitial } from '@/lib/ads';
 import { useAuthStore } from '@/stores/authStore';
 import { getGuestMode, hasSeenOnboarding } from '@/utils/onboarding';
 
@@ -48,6 +49,14 @@ export default function RootLayout() {
       SplashScreen.hideAsync();
     }
   }, [fontsLoaded, fontError]);
+
+  useEffect(() => {
+    initializeAds().then(() => {
+      setTimeout(() => {
+        preloadInterstitial();
+      }, 5000);
+    });
+  }, []);
 
   if (!fontsLoaded && !fontError) {
     return null;

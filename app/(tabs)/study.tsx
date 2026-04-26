@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { AdBanner } from '@/components/ads/AdBanner';
 import { CategoryGrid } from '@/components/home/CategoryGrid';
 import { WeakCategoriesCard } from '@/components/stats/WeakCategoriesCard';
 import { FilterChip } from '@/components/study/FilterChip';
@@ -190,6 +191,8 @@ export default function StudyScreen() {
             </View>
           )}
         </View>
+
+        <AdBanner />
       </ScrollView>
     </SafeAreaView>
   );

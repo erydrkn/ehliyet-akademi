@@ -1,13 +1,16 @@
 import { type Href, useLocalSearchParams, useRouter } from 'expo-router';
+import { useEffect } from 'react';
 import { ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Typography } from '@/components/ui/Typography';
+import { INTERSTITIAL_RULES } from '@/constants/ads';
 import { CATEGORIES } from '@/constants/categories';
 import { TOPICS, type TopicId } from '@/constants/topics';
 import { useAuth } from '@/hooks/useAuth';
+import { preloadInterstitial, showInterstitial } from '@/lib/ads';
 import type { QuestionCategory } from '@/types/database';
 
 type Feedback = {
@@ -66,6 +69,16 @@ export default function QuizResultScreen() {
     await exitGuest();
     router.replace('/register' as Href);
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      void showInterstitial(INTERSTITIAL_RULES.QUIZ_END_PROBABILITY);
+    }, 1500);
+
+    preloadInterstitial();
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <SafeAreaView
