@@ -13,7 +13,7 @@ export function ExamCTACard({ onPress }: Props) {
       onPress={onPress}
       accessibilityRole="button"
       accessibilityLabel="Deneme sınavı başlat"
-      className="flex-row items-center gap-4 rounded-2xl bg-blue-600 p-5 active:bg-blue-700"
+      className="flex-row items-center gap-4 rounded-2xl bg-blue-600 p-5 active:bg-blue-700 dark:bg-blue-700 dark:active:bg-blue-800"
     >
       <View className="h-14 w-14 items-center justify-center rounded-full bg-blue-500/40">
         <GraduationCap size={28} color="#FFFFFF" />
@@ -23,7 +23,7 @@ export function ExamCTACard({ onPress }: Props) {
           className="text-2xl text-white"
           style={{ fontFamily: fontFamily.semibold }}
         >
-          🎓 Deneme Sınavı
+          Deneme Sınavı
         </Text>
         <Text
           className="text-xs text-white opacity-90"
