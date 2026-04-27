@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "ehliyet-akademi",
+    "name": "Ehliyet Akademi",
     "slug": "ehliyet-akademi",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -10,7 +10,7 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.ehliyetakademi"
+      "bundleIdentifier": "com.erydrkn.ehliyetakademi"
     },
     "android": {
       "adaptiveIcon": {
@@ -21,7 +21,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.anonymous.ehliyetakademi"
+      "package": "com.erydrkn.ehliyetakademi"
     },
     "web": {
       "output": "static",
